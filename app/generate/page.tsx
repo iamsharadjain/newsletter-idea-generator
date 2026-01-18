@@ -62,7 +62,7 @@ export default function GeneratePage() {
                             <ArrowLeft className="h-6 w-6" />
                         </Link>
                         <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-                            Idea Generator
+                            TopicFlow Generator
                         </h1>
                     </div>
 

@@ -7,8 +7,8 @@ export default function Footer() {
         <footer className="border-t border-slate-200 bg-white py-12">
             <div className="container px-4 md:px-6 mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
                 <div className="flex items-center gap-2">
-                    <span className="font-bold text-xl text-slate-900">IdeaGen</span>
-                    <span className="text-slate-500 text-sm">© 2024</span>
+                    <span className="font-bold text-xl text-slate-900">TopicFlow</span>
+                    <span className="text-slate-500 text-sm">© 2026</span>
                 </div>
 
                 <div className="flex gap-6 text-sm text-slate-500">
