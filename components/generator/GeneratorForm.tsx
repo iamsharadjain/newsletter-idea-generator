@@ -13,7 +13,7 @@ import { Loader2, Sparkles } from "lucide-react";
 const formSchema = z.object({
     niche: z.string().min(2, "Niche is required (e.g. 'SaaS Marketing')"),
     audience: z.string().optional(),
-    count: z.coerce.number().min(1).max(30).default(5),
+    count: z.coerce.number().min(1).max(5).default(5),
     pastTopics: z.string().optional(),
 });
 
@@ -71,9 +71,6 @@ export default function GeneratorForm({ onSubmit, isLoading }: GeneratorFormProp
                         className="flex h-10 w-full rounded-md border border-slate-200 bg-white px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-950 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                         <option value="5">5 Ideas</option>
-                        <option value="10">10 Ideas</option>
-                        <option value="20">20 Ideas</option>
-                        <option value="30">30 Ideas</option>
                     </select>
                 </div>
 

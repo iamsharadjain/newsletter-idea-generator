@@ -1,17 +1,38 @@
-
 import { NextResponse } from 'next/server';
 import { openai, GENERATION_SYSTEM_PROMPT, generateUserPrompt } from '@/lib/openai';
 import { z } from 'zod';
+import { LRUCache } from 'lru-cache';
+
+// Rate Limiter: 100 IPs max, expires after 1 hour
+const rateLimit = new LRUCache<string, number>({
+    max: 100,
+    ttl: 1000 * 60 * 60, // 1 hour
+});
 
 // Schema for input validation
 const bodySchema = z.object({
     niche: z.string().min(1, "Niche is required"),
     audience: z.string().optional().default(""),
-    count: z.number().min(1).max(30).default(5),
+    count: z.number().min(1).max(5).default(5),
     pastTopics: z.string().optional(),
 });
 
 export async function POST(req: Request) {
+    // 1. Get Client IP
+    const ip = (req.headers.get("x-forwarded-for") ?? "127.0.0.1").split(",")[0];
+
+    // 2. Check Limit
+    const currentUsage = rateLimit.get(ip) || 0;
+    if (currentUsage >= 3) {
+        return NextResponse.json(
+            { error: "Rate limit exceeded. You can generate 3 times per hour." },
+            { status: 429 }
+        );
+    }
+
+    // 3. Increment Usage
+    rateLimit.set(ip, currentUsage + 1);
+
     try {
         const body = await req.json();
         const { niche, audience, count, pastTopics } = bodySchema.parse(body);
