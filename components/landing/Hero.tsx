@@ -23,7 +23,7 @@ export default function Hero() {
                         className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-sm font-medium text-slate-800 shadow-sm"
                     >
                         <Sparkles className="mr-2 h-4 w-4 text-purple-600" />
-                        <span>TopicFlow: AI Newsletter Growth</span>
+                        <span>TopicFlow: Newsletter Idea Engine</span>
                     </motion.div>
 
                     <motion.h1
